@@ -2,5 +2,5 @@ from flask_blog import app
 
 
 @app.route('/')
-def show_enrtries():
+def show_entries():
     return "Hello World!"
