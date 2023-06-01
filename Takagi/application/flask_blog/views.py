@@ -11,15 +11,17 @@ def show_entries():
 def login():
     if request.method == 'POST':
         if request.form['username'] != app.config['USERNAME']:
-            print('ユーザー名が違います')
+            flash('ユーザー名が違います')
         elif request.form['password'] != app.config['PASSWORD']:
-            print('パスワードが違います')
+            flash('パスワードが違います')
         else:
             session['logged_in'] = True
+            flash('ログインしました')
             return redirect('/')
     return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
+    flash('ログアウトしました')
     return redirect('/')
