@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+<p>給与：{{ salary }}円の場合、支給額：{{ payment }}円、税額：{{ tax_amount }}円です。</p>
+<form action="{{ url_for('output') }}" method="post">
+    <button type="submit" class="btn btn-primary">戻る</button>
+</form>
+{% endblock %}
