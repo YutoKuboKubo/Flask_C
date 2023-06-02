@@ -32,8 +32,6 @@ def input():
     return render_template('input.html')
 
 
-@app.route('/output', methods=["GET", "POST"])
+@app.route('/output')
 def output():
-    if request.method == "POST":
-        return render_template('input.html')
-    return render_template('output.html')
+    return render_template('input.html')
