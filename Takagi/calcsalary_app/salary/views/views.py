@@ -9,6 +9,7 @@ TAX_HIGHT = 0.2
 def input():
     input_num = session.get('input_num', None)
     return render_template('input.html', input = input_num)
+
  
 @app.route('/output', methods = ['GET', 'POST'])
 def output():

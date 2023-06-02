@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block body %}
+    <label for = "InputTitle">給与</label>
+
     <form action = "{{ url_for('output') }}" method = post>
-        <div class = "form-group">
-            <label for = "InputTitle">給与</label>
-            <input type = "number" class = "form-control" id = "salary" name = "salary" value = "{{ input }}">
+        <div class = "form-group">     
+            <div class="input-group mb-3">
+                <span class="input-group-text">￥</span>
+                <input type="number" class="form-control" id = "salary" name = "salary" value = "{{ input }}">
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">計算する</button>
     </form>
