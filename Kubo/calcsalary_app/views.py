@@ -1,5 +1,5 @@
 from calcsalary_app import app
-from flask import request, redirect, url_for, render_template, flash, session
+from flask import request, render_template, flash, session
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -11,14 +11,14 @@ def input():
             salary = int(request.form['salary'])
             if salary >= 10000000000:
                 flash('給与には最大9,999,999,999まで入力可能です。')
-                session['input_data'] = salary # セッションに値を保存し、input.htmlに渡す
+                session['input_data'] = salary  # セッションに値を保存し、input.htmlに渡す
                 return render_template('input.html', data=session['input_data'])
             elif salary < 0:
                 flash('給与にはマイナスの値は入力できません。')
-                session['input_data'] = salary # セッションに値を保存し、input.htmlに渡す
+                session['input_data'] = salary  # セッションに値を保存し、input.htmlに渡す
                 return render_template('input.html', data=session['input_data'])
             else:
-                session.pop('input_data', None) # セッションを削除
+                session.pop('input_data', None)  # セッションを削除
                 if salary > 1000000:
                     tax_amount = int((salary - 1000000) * 0.2 + (1000000 * 0.1))
                 else:
