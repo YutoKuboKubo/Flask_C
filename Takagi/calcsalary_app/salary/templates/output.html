@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+    <p>
+        給与 : {{ salary }} 円の場合、支給額 : {{ pay }} 円、税 : {{ tax }} 円です。
+    </p>            
+    <form action = "{{ url_for('input') }}" method = post>      
+        <div class = "form-group">
+            <button type = "submit" class = "btn btn-primary"> 戻る </button>
+        </div>
+    </form>
+{% endblock %}
