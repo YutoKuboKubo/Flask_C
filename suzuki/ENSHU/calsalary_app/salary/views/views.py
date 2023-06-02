@@ -37,17 +37,4 @@ def output():
 #        text = "給与:" + "{:,}".format(input_salary) + " 円の場合、支給額：" + "{:,}".format(pay) + " 円、税額：" + "{:,}".format(tax) + " 円"
 #    return render_template("output.html", text=text)
 
-    #バリデーション    
-    if request.form["salary"] == "":
-        flash('給与が未入力です。入力してください。')
-        return redirect(url_for("input"))
-
-    if int(request.form["salary"]) > 9999999999:
-        flash('給与には最大9,999,999,999まで入力可能です。')
-        session["input_data"] = request.form["salary"]
-        return redirect(url_for("input"))
-
-    if int(request.form["salary"]) < 0:
-        flash('給与にはマイナスの値は入力できません。')
-        session["input_data"] = request.form["salary"]
-        return redirect(url_for("input")) 
+    
