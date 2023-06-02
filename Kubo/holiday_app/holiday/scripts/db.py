@@ -1,6 +1,6 @@
 from flask_script import Command
-from flask_blog import db
-from flask_blog.models.entries import Entry
+from holiday import db
+from holiday.models.mst_holiday import Holiday
 
 
 class InitDB(Command):
