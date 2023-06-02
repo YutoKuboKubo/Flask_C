@@ -3,22 +3,25 @@ from salary import app
 
 @app.route('/')
 def show_entries():
-    return render_template('input.html')
+    input_data = session.get("input_data", None)
+    return render_template('input.html', input=input_data)
 
 @app.route('/output', methods =['GET', 'POST'])
 def output():
-    input_salary = request.form["salary"]
-    session["input_data"] = input_salary
+    session["input_data"] = ""
     if request.method == 'POST':
+        input_salary = request.form["salary"]
         if input_salary == "":
             flash('給与が未入力です。入力してください。')
-            return render_template('input.html', a=session["input_data"])
+            return redirect(url_for("show_entries"))
         elif len(input_salary) > 10:
             flash('給与には最大9,999,999,999まで入力可能です。')
-            return render_template('input.html', a=session["input_data"])
+            session["input_data"] = input_salary
+            return redirect(url_for("show_entries"))
         elif int(input_salary) < 0:
             flash('給与にはマイナスの値は入力できません。') 
-            return render_template('input.html', a=session["input_data"])
+            session["input_data"] = input_salary
+            return redirect(url_for("show_entries"))
         else:
             input_salary = int(request.form["salary"])
             if input_salary <= 1000000:
@@ -27,8 +30,7 @@ def output():
                 input_tax = int(1000000 * 0.1 + (input_salary - 1000000) * 0.2)
             input_pay = input_salary - input_tax
             return render_template("output.html", salary=input_salary, pay=input_pay, tax=input_tax)
-    return render_template('input.html')
     
-@app.route('/')
+@app.route('/back')
 def back():
-    return render_template('input.html')
+    return redirect(url_for("show_entries"))
