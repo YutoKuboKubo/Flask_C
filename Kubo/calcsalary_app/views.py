@@ -7,7 +7,9 @@ def input():
     input_val = session.get('input_data', None)
     return render_template('input.html', data=input_val)
 
-
+MILLION = 1000000
+UPPER_TAX = 0.2
+LOWER_TAX = 0.1
 @app.route('/output', methods=['GET', 'POST'])
 def output():
     if request.method == "POST":
@@ -25,10 +27,10 @@ def output():
                 return redirect(url_for('input'))
             else:
                 session.pop('input_data', None)  # セッションを削除
-                if salary > 1000000:
-                    tax_amount = int((salary - 1000000) * 0.2 + (1000000 * 0.1))
+                if salary > MILLION:
+                    tax_amount = int((salary - MILLION) * UPPER_TAX + (MILLION * LOWER_TAX))
                 else:
-                    tax_amount = int(salary * 0.1)
+                    tax_amount = int(salary * LOWER_TAX)
                 payment = salary - tax_amount
                 salary = "{:,}".format(salary)
                 tax_amount = "{:,}".format(tax_amount)
