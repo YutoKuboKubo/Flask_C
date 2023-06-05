@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
 <p>処理結果</p>
-<p>は「」に更新されました</p>
+<p>{{ holi_date}}（{{ holi_text }}）が登録されました</p>
 <a href="{{url_for('new_holiday')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
 {% endblock %}
