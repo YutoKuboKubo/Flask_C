@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
 {% block body %}
-<table>
+<table class="table">
     <thead  class="table-primary">
-        <th scope="col">祝日</th>
-        <th scope="col">テキスト</th>
-    </thead>
+        <tr>
+            <th scope="col">祝日</th>
+            <th scope="col">テキスト</th>
+        </tr>
+        </thead>
     <tbody>
     {% for holiday in holiday %}
         <tr>

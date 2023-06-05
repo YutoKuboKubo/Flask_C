@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-<p>処理結果</p>
+<h4>処理結果</h4>
 {% if status == 'add' %}
     <p>{{ holi_date}}（{{ holi_text }}）が登録されました</p>
 {% elif status == 'update' %}
@@ -8,5 +8,7 @@
 {% elif status == 'delete' %}
     <p>{{ holi_date}}（{{ holi_text }}）は削除されました</p>
 {% endif %}
-<a href="{{url_for('input')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
+<div style="margin-top: 40px;">
+    <a href="{{url_for('input')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
+</div>
 {% endblock %}
