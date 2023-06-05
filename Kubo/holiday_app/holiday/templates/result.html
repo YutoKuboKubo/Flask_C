@@ -5,6 +5,8 @@
     <p>{{ holi_date}}（{{ holi_text }}）が登録されました</p>
 {% elif status == 'update' %}
     <p>{{ holi_date }}は「{{ holi_text }}」に更新されました</p>
+{% elif status == 'delete' %}
+    <p>{{ holi_date}}（{{ holi_text }}）は削除されました</p>
 {% endif %}
-<a href="{{url_for('new_holiday')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
+<a href="{{url_for('input')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
 {% endblock %}
