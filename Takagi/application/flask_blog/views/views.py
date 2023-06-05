@@ -1,6 +1,14 @@
 from flask import request, redirect, url_for, render_template, flash, session
 from flask_blog import app
-from flask_blog import db
+from functools import wraps
+
+def login_required(view):
+    @wraps(view)
+    def inner(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('logged_in'))
+        return view(*args, **kwargs)
+    return inner
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
