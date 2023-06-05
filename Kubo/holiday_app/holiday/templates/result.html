@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
 <p>処理結果</p>
-<p>{{ holi_date}}（{{ holi_text }}）が登録されました</p>
+{% if status == 'add' %}
+    <p>{{ holi_date}}（{{ holi_text }}）が登録されました</p>
+{% elif status == 'update' %}
+    <p>{{ holi_date }}は「{{ holi_text }}」に更新されました</p>
+{% endif %}
 <a href="{{url_for('new_holiday')}}" class="btn btn-primary" role="button" data-bs-toggle="button">戻る</a>
 {% endblock %}
