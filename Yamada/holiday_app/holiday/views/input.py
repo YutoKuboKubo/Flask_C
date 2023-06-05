@@ -8,13 +8,22 @@ def show_entries():
     return render_template('input.html')
 
 @app.route('/maintenance_date', methods=['POST'])
-def add_holiday():
-    holiday = Holiday(
-        holi_date=request.form['holiday'],
+def input_holiday():
+    if request.form["button"] == "add_holiday":
+        holiday = Holiday(
+            holi_date=request.form['holiday'],
+            holi_text=request.form['holiday_text']
+        )
+        db.session.add(holiday)
+        db.session.commit()
+        holi_date=request.form['holiday']
         holi_text=request.form['holiday_text']
-    )
-    db.session.add(holiday)
-    db.session.commit()
-    holi_date=request.form['holiday'],
-    holi_text=request.form['holiday_text']
-    return render_template('result.html', holi_date=holi_date, holi_text=holi_text)
+        return render_template('result.html', holi_date=holi_date, holi_text=holi_text, tag="registar")
+
+    elif request.form["button"] == "delete_holiday":
+        holi_date=request.form['holiday']
+        holiday = Holiday.query.get(holi_date)
+        holi_text = holiday.holi_text
+        db.session.delete(holiday)
+        db.session.commit()
+        return render_template('result.html', holi_date=holi_date, holi_text=holi_text, tag="delete")

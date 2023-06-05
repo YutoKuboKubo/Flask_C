@@ -1,11 +1,17 @@
 {% extends "layout.html" %} 
 {% block body %}
 <form action="{{ url_for('back') }}">
-    <label for="InputTitle">処理結果</label>
+    <h4>処理結果</h4>
+    {% if tag=="registar" %}
+    <p>{{ holi_date }}({{ holi_text }})が登録されました</p>
+    {% elif tag=="delete" %}
+    <p>{{ holi_date }}({{ holi_text }})が削除されました</p>
+    {% else %}
     <p>{{ holi_date }}は「{{ holi_text }}」に更新されました</p>
-    
+    {% endif %}
     <br><br>
     
     <button type="submit" class="btn btn-primary">戻る</button> 
 </form>
+
 {% endblock %}
