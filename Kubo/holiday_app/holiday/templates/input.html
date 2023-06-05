@@ -12,5 +12,5 @@
     <button type="submit" class="btn btn-primary" name="button" value="add">新規登録・更新</button>
     <button type="submit" class="btn btn-danger" name="button" value="delete">削除</button>
 </form>
-<button type="submit" class="btn btn-secondary">一覧表示</button>
+<a href="{{url_for('show_list')}}" class="btn btn-secondary" role="button" data-bs-toggle="button">一覧表示</a>
 {% endblock %}
