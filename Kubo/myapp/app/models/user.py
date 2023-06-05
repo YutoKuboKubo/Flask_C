@@ -1,9 +1,15 @@
-from app import db
+from app import db, login_manager
 from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import UserMixin, current_user
 from datetime import datetime
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+# ユーザのモデル
 class User(UserMixin, db.Model):
 
     __tablename__ = 'users'
@@ -20,3 +26,12 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<Entry id:{} username:{} password:{}>'.format(self.id, self.username, self.password)
+
+    # usernameに該当するユーザを取得
+    @classmethod
+    def select_user_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()
+
+    def validate_password(self, password):
+        return check_password_hash(self.password, password)
+
