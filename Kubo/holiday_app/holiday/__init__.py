@@ -7,5 +7,5 @@ app.config.from_object('holiday.config')
 
 db = SQLAlchemy(app)
 
-from holiday.views import input
+from holiday.views import input, maintenance_date, list
 # from holiday.views import input, list, maintenance_date
