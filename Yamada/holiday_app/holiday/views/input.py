@@ -14,11 +14,17 @@ def input_holiday():
             holi_date=request.form['holiday'],
             holi_text=request.form['holiday_text']
         )
-        db.session.add(holiday)
-        db.session.commit()
         holi_date=request.form['holiday']
         holi_text=request.form['holiday_text']
-        return render_template('result.html', holi_date=holi_date, holi_text=holi_text, tag="registar")
+        exists = Holiday.query.get(holi_date)
+        if exists:
+            db.session.merge(holiday)
+            db.session.commit()
+            return render_template('result.html', holi_date=holi_date, holi_text=holi_text, tag="update")
+        else:
+            db.session.add(holiday)
+            db.session.commit()
+            return render_template('result.html', holi_date=holi_date, holi_text=holi_text, tag="registar")
 
     elif request.form["button"] == "delete_holiday":
         holi_date=request.form['holiday']
