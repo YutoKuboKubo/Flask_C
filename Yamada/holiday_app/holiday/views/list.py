@@ -5,4 +5,5 @@ from holiday.models.mst_holiday import Holiday
 
 @app.route('/list')
 def list_holiday():
-    return render_template('list.html')
+    holidays = Holiday.query.order_by(Holiday.holi_date.asc()).all()
+    return render_template('list.html', holidays=holidays)
