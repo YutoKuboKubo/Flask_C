@@ -35,3 +35,8 @@ class User(UserMixin, db.Model):
     def select_user_by_id(cls, id):
         return cls.query.get(id)
 
+    # usernameに該当するユーザを取得
+    @classmethod
+    def select_user_by_username(cls, username):
+        return cls.query.filter_by(username=username).first()
+

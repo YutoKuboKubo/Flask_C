@@ -2,6 +2,11 @@
 {% block title %}
 ホーム
 {% endblock %}
+
 {% block body %}
-こんにちは
+{% if current_user.is_authenticated %}
+<p>ログイン成功！</p>
+{% else %}
+<p>ログイン or 新規登録をしてください</p>
+{% endif %}
 {% endblock %}

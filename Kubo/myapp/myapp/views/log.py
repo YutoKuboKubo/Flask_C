@@ -14,10 +14,6 @@ from flask_bcrypt import generate_password_hash
 def home():
     return render_template('home.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -33,3 +29,23 @@ def register():
         flash('新規登録が完了しました')
         return redirect(url_for('login'))
     return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    '''ログイン用'''
+    if request.method == "POST":
+        # ログインしようとしているユーザを取得
+        user = User.select_user_by_username(request.form['username'])
+        # ユーザが存在し、かつパスワードが会っていた場合
+        if user and user.validate_password(request.form['password']):
+            # ログイン
+            login_user(user, remember=True)
+            return redirect(url_for('home'))
+        elif not user:
+            flash('存在しないユーザです')
+            return redirect(url_for('login'))
+        elif not user.validate_password(request.form['password']):
+            flash('ユーザ名とパスワードの組み合わせが間違っています')
+            return redirect(url_for('login'))
+    return render_template('login.html')
