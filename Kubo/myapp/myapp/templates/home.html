@@ -5,8 +5,13 @@
 
 {% block body %}
 {% if current_user.is_authenticated %}
-<p>ログイン成功！</p>
+{% for tweet in tweets[::-1] %}
+    <article>
+        <h2>{{ tweet.title }}</h2>
+        <p>{{ tweet.body }}</p>
+    </article>
+    {% endfor %}
 {% else %}
-<p>ログイン or 新規登録をしてください</p>
+    <p>ログイン or 新規登録をしてください</p>
 {% endif %}
 {% endblock %}

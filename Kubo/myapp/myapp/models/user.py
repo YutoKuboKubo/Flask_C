@@ -40,3 +40,25 @@ class User(UserMixin, db.Model):
     def select_user_by_username(cls, username):
         return cls.query.filter_by(username=username).first()
 
+
+class Tweets(db.Model):
+
+    __tablename__ = 'tweets'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(64))
+    picture_path = db.Column(db.Text)
+    body = db.Column(db.Text)
+    from_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
+    create_at = db.Column(db.DateTime, default=datetime.now)
+    update_at = db.Column(db.DateTime, default=datetime.now)
+
+    def __init__(self, title, body, picture_path, from_user_id):
+        self.title = title
+        self.body = body
+        self.picture_path = picture_path
+        self.from_user_id = from_user_id
+
+
+    def create_tweet(self):
+        db.session.add(self)

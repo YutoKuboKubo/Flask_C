@@ -9,8 +9,7 @@ app.config.from_object('myapp.config')
 
 db = SQLAlchemy(app)
 
-# ログイン機能作成用
-from myapp.views import log
+from myapp.views import log, tweet
 
 login_manager = LoginManager()
 login_manager.init_app(app)

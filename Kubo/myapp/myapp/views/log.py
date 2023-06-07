@@ -10,11 +10,6 @@ from flask_login import (
 from flask_bcrypt import generate_password_hash
 
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     '''新規登録メソッド'''
