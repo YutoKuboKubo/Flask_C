@@ -50,14 +50,16 @@ class Tweets(db.Model):
     picture_path = db.Column(db.Text)
     body = db.Column(db.Text)
     from_user_id = db.Column(db.Integer, db.ForeignKey('users.id'), index=True)
+    from_user_name = db.Column(db.String(10))
     create_at = db.Column(db.DateTime, default=datetime.now)
     update_at = db.Column(db.DateTime, default=datetime.now)
 
-    def __init__(self, title, body, picture_path, from_user_id):
+    def __init__(self, title, body, picture_path, from_user_id, from_user_name):
         self.title = title
         self.body = body
         self.picture_path = picture_path
         self.from_user_id = from_user_id
+        self.from_user_name = from_user_name
 
 
     def create_tweet(self):

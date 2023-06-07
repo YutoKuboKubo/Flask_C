@@ -4,14 +4,18 @@
 {% endblock %}
 
 {% block body %}
-{% if current_user.is_authenticated %}
-{% for tweet in tweets[::-1] %}
-    <article>
-        <h2>{{ tweet.title }}</h2>
-        <p>{{ tweet.body }}</p>
-    </article>
-    {% endfor %}
-{% else %}
-    <p>ログイン or 新規登録をしてください</p>
-{% endif %}
+    {% if current_user.is_authenticated %}
+        {% for tweet in tweets[::-1] %}
+            <article>
+                <p>作成者：{{ tweet.from_user_name }}</p>
+                <h2>{{ tweet.title }}</h2>
+                <p>{{ tweet.body }}</p>
+            </article>
+
+            <a href="{{url_for('update_tweet', id=tweet.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">編集</a>
+            <a href="{{url_for('delete_tweet', id=tweet.id)}}" class="btn btn-danger" role="button" data-bs-toggle="button">削除</a>
+        {% endfor %}
+    {% else %}
+        <p>ログイン or 新規登録をしてください</p>
+    {% endif %}
 {% endblock %}
