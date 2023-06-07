@@ -1,4 +1,23 @@
 {% extends "layout.html" %} 
 {% block body %}
 <h1>天和を和了ろう！</h1>
+
+<br><br>
+
+<p>東1局　あなた：東家</p>
+{% for i in range(13) %}
+<a><img src="../static/{{ tilelinks[i] }}.gif"></a>
+{% endfor %}
+<a href="https://www.mynavi.jp/"><img src="../static/{{ tilelinks[13] }}.gif" style="margin-left: 30px;"></a>
+
+<br><br>
+
+<div class="btn-group">
+<form action="{{ url_for('reload') }}">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(51, 140, 199, 0.705); border-color: rgba(51, 140, 199, 0.705);">配りなおす</button>
+</form>
+<form action="{{ url_for('tumo') }}">
+    <button type="submit" class="btn btn-primary" style="background-color: rgba(168, 55, 149, 0.705); border-color: rgba(168, 55, 149, 0.705); margin-left: 50px;">ツモ！</button>
+</form>
+</div>
 {% endblock %}
