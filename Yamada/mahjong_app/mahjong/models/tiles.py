@@ -1,4 +1,4 @@
-from marjong import db
+from mahjong import db
 
 class Tiles(db.Model):
     __tablename__ = 'tiles'

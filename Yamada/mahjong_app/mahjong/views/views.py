@@ -1,8 +1,8 @@
 from flask import request, redirect, url_for, render_template, flash, session
-from marjong import app
+from mahjong import app
 import random
-from marjong import db
-from marjong.models.tiles import Tiles
+from mahjong import db
+from mahjong.models.tiles import Tiles
 
 def distribute(tile_list):
     for i in range(14):
