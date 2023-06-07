@@ -1,6 +1,6 @@
 from flask_script import Command
-from app import db
-from app.models.user import User
+from myapp import db
+from myapp.models.user import User
 
 
 class InitDB(Command):

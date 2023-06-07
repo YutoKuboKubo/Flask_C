@@ -1,6 +1,6 @@
 from flask_script import Manager
-from app import app
-from app.scripts.db import InitDB
+from myapp import app
+from myapp.scripts.db import InitDB
 
 
 if __name__ == '__main__':
