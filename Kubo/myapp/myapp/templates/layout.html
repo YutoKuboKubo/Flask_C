@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>MyApp</title>
+    <title>{% block title %}Twitterr{% endblock %}</title>
     <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src ="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -10,10 +10,17 @@
 </head>
 <body>
     <head>
-        <a href="#">新規登録</a>
-        <a href="#">ログイン</a>
+        <a href="{{ url_for('register') }}">新規登録</a>
+        <a href="{{ url_for('login') }}">ログイン</a>
         <a href="#">ログアウト</a>
     </head>
+
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-info" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+
     <div class="container">
         {% block body %}
         {% endblock %}

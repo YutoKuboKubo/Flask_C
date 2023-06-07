@@ -22,11 +22,16 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<Entry id:{} username:{} password:{}>'.format(self.id, self.username, self.password)
 
-    # # usernameに該当するユーザを取得
-    # @classmethod
-    # def select_user_by_username(cls, username):
-    #     return cls.query.filter_by(username=username).first()
+    # パスワードが正しいか確認
+    def validate_password(self, password):
+        return check_password_hash(self.password, password)
 
-    # def validate_password(self, password):
-    #     return check_password_hash(self.password, password)
+    # dbにユーザを追加
+    def create_new_user(self):
+        db.session.add(self)
+
+    # idに該当するユーザを取得
+    @classmethod
+    def select_user_by_id(cls, id):
+        return cls.query.get(id)
 
