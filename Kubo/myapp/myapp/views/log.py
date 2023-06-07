@@ -49,3 +49,10 @@ def login():
             flash('ユーザ名とパスワードの組み合わせが間違っています')
             return redirect(url_for('login'))
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    '''ログアウト用'''
+    logout_user()
+    return redirect(url_for('home'))
