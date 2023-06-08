@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block title %}
+ホーム
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-8">
+    {% if current_user.is_authenticated %}
+        {% for tweet in tweets[::-1] %}
+            <div class="card" style="width: 30rem;">
+                {% if tweet.picture_path is none %}
+                    <img src="{{ url_for('static', filename='tweet_images/6_1686199666jpg') }}" class="card-img-top">
+                {% else %}
+                    <img class="card-img-top" src="{{ url_for('static', filename=tweet.picture_path) }}">
+                {% endif %}
+                <div class="card-body">
+                <h5 class="card-title">{{ tweet.title }}</h5>
+                <p class="card-text">{{ tweet.body }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">作成者：{{ tweet.from_user_name }}</li>
+                </ul>
+                {% if tweet.from_user_id == current_user.id %}
+                    <a href="{{url_for('update_tweet', id=tweet.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">編集</a>
+                    <a href="{{url_for('delete_tweet', id=tweet.id)}}" class="btn btn-danger" role="button" data-bs-toggle="button">削除</a>
+                {% endif %}
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+    <div class="col-4 login">
+        <div class="card" style="width: 18rem;">
+            {% if current_user.picture_path is none %}
+            <img src="{{ url_for('static', filename='tweet_images/6_1686199666jpg') }}" class="card-img-top">
+            {% else %}
+                <img class="card-img-top" src="{{ url_for('static', filename=current_user.picture_path) }}">
+            {% endif %}
+            <div class="card-body">
+                <p class="card-text">ログイン中のユーザ</p>
+                <h5 class="card-title">{{ current_user.username }}</h5>
+            </div>
+        </div>
+    </div>
+</div>
+    {% else %}
+        <p>ログイン or 新規登録をしてください</p>
+    {% endif %}
+{% endblock %}
