@@ -6,9 +6,9 @@
 
 <p>東1局　あなた：東家</p>
 {% for i in range(13) %}
-<a><img src="../static/{{ tilelinks[i] }}.gif"></a>
+<a href="{{ url_for('playtile')}}" method="POST"><img src="../static/{{ tilelinks[i] }}.gif"></a>
 {% endfor %}
-<a href="https://www.mynavi.jp/"><img src="../static/{{ tilelinks[13] }}.gif" style="margin-left: 30px;"></a>
+<a href="{{ url_for('playtile')}}" method="POST"><img src="../static/{{ tilelinks[13] }}.gif" style="margin-left: 30px;"></a>
 
 <br><br>
 

@@ -13,15 +13,16 @@ def distribute(tile_list):
         else:
             tile_list.sort()
 
-@app.route('/')
-def show_entries():
-    tile_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    tilelink_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    distribute(tile_list)
-    for j in range(14):
-        tile = Tiles.query.get(tile_list[j])
-        tilelink_list[j] = tile.link
-    return render_template('index.html', tilelinks=tilelink_list)
+@app.route('/', methods=['GET', 'POST'])
+def playtile():
+    if request.method == 'GET':
+        tile_list = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        tilelinks = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        distribute(tile_list)
+        for j in range(14):
+            tile = Tiles.query.get(tile_list[j])
+            tilelinks[j] = tile.link
+        return render_template('index.html', tilelinks=tilelinks)
 
 @app.route('/tumo')
 def tumo():
