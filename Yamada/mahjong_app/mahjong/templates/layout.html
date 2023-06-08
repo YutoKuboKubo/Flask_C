@@ -8,13 +8,13 @@
     <script src ="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src ="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet" type="text/css">
-    <link rel=stylesheet href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{ url_for('playtile') }}" method="GET">配牌くばる君</a>
+            <a class="navbar-brand" href="{{ url_for('playtile', num='') }}" method="get">配牌くばる君</a>
         </nav>
         
         {% for message in get_flashed_messages() %}
