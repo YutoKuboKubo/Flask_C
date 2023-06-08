@@ -4,7 +4,7 @@
 
 <br><br>
 
-<p>東1局　あなた：東家</p>
+<p>東1局　あなた：東家　{{ count }}巡目</p>
 {% for i in range(13) %}
 <a href="{{ url_for('tileselect', num=i) }}" method="get"><img src="../static/{{ tilelinks[i] }}.gif"></a>
 {% endfor %}

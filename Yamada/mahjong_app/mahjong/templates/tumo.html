@@ -1,4 +1,8 @@
 {% extends "layout.html" %} 
 {% block body %}
+{% if count == 1 %}
 <img src="../static/tenho.png" width=100%>
+{% else %}
+<h1>ツモ</h1>
+{% endif %}
 {% endblock %}

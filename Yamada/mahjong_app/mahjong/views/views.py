@@ -6,6 +6,7 @@ from mahjong.models.tiles import Tiles
 
 tiles =[]
 tilelink_list = []
+count = 1
 
 def distribute(tile_list):
     for i in range(14):
@@ -29,12 +30,14 @@ def playtile():
             tilelinks[j] = tile.link
         global tilelink_list
         tilelink_list = tilelinks
-        return render_template('index.html', tilelinks=tilelink_list)
+        global count
+        return render_template('index.html', tilelinks=tilelink_list, count=count)
 
 @app.route('/<int:num>', methods=['GET'])
 def tileselect(num):
     global tilelink_list
     global tiles
+    global count
     if request.method == 'GET':
         temp = tilelink_list[13]
         tilelink_list[13] = tilelink_list[num]
@@ -42,12 +45,24 @@ def tileselect(num):
         tumonum = random.randint(1,34)
         tumopai = Tiles.query.get(tumonum)
         tilelink_list[13] = tumopai.link
-        return render_template('index.html', tilelinks=tilelink_list)
-        
+       
+        for j in range(14):
+            tile = Tiles.query.filter(Tiles.link == tilelink_list[j]).all()
+            print(tiles)
+            print(tile.id)
+            tiles[j] = tile.id
+        new_tiles = tiles[:13].sort() + tiles[13]
+        for k in range(14):
+            new_tile = Tiles.query.get(new_tiles[k])
+            tilelink_list[k] = new_tile.link
+
+        count = count + 1
+        return render_template('index.html', tilelinks=tilelink_list, count=count)
 
 @app.route('/tumo')
 def tumo():
-    return render_template('tumo.html')
+    global count
+    return render_template('tumo.html', count=count)
 
 @app.route('/')
 def reload():
