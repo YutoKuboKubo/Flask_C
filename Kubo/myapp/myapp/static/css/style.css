@@ -1,3 +1,7 @@
-head {
-    background-color: aqua;
+.login {
+    position: fixed;
+}
+
+* {
+    color: brown;
 }

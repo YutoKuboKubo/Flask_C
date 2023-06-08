@@ -8,6 +8,7 @@
     <tr>
         <th scope="col">#</th>
         <th scope="col">ユーザ名</th>
+        <th scope="col">トゥイート数</th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -17,7 +18,17 @@
         <th scope="row">{{ user.id }}</th>
         <td>{{ user.username }}</td>
         <td>
-            <a href="{{url_for('user_info', id=user.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">情報閲覧</a>
+            {% set cnt = [0] %}
+            {% for tweet in tweets %}
+                {% if tweet.from_user_id == user.id %}
+                    {% set _ = cnt.append(cnt[0] + 1) %}
+                    {% set _ = cnt.pop(0) %}
+                {% endif %}
+            {% endfor %}
+            {{ cnt[0] }}
+        </td>
+        <td>
+            <a href="{{url_for('user_info', id=user.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">プロフィール閲覧</a>
         </td>
     </tr>
     {% endfor %}

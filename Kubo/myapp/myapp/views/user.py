@@ -15,12 +15,17 @@ def user(id):
     '''ユーザの情報変更用'''
     user = User.select_user_by_id(id)
     if request.method == "POST":
+        file = request.files['picture_path'].read()
+        file_name = current_user.get_id() + '_' + str(int(datetime.now().timestamp())) + 'jpg'
+        picture_path = '/home/matcha-23training/Flask_C/Kubo/myapp/myapp/static/user_images/' + file_name
+        open(picture_path, 'wb').write(file)
+        user.picture_path = 'user_images/' + file_name
         user.username = request.form['username']
         user.password = generate_password_hash(request.form['password'])
         db.session.merge(user)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('user.html', id=id, username=user.username, password=user.password)
+    return render_template('user.html', id=id, user=user)
 
 
 @app.route('/user_list')
@@ -28,7 +33,8 @@ def user(id):
 def user_list():
     '''ユーザの一覧を表示する用'''
     users = User.query.all()
-    return render_template('user_list.html', users=users)
+    tweets = Tweets.query.all()
+    return render_template('user_list.html', users=users, tweets=tweets)
 
 
 @app.route('/user_info/<int:id>')

@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 <h1>ユーザ情報編集画面</h1>
-<form action="{{ url_for('user', id=id) }}" method="post">
+<form action="{{ url_for('user', id=id) }}" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="InputTitle">ユーザ名</label>
         <input type="text" class="form-control" id="InputTitle" name="username" value="{{ username }}">
