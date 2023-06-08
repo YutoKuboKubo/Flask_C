@@ -9,7 +9,7 @@ app.config.from_object('myapp.config')
 
 db = SQLAlchemy(app)
 
-from myapp.views import log, tweet
+from myapp.views import log, tweet, user
 
 login_manager = LoginManager()
 login_manager.init_app(app)
