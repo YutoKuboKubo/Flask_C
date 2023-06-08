@@ -3,6 +3,12 @@
 {% if count == 1 %}
 <img src="../static/tenho.png" width=100%>
 {% else %}
-<h1>ツモ</h1>
+<p>翻数を入力してください</p>
+<form action="{{ url_for('hancalc') }}" method="post">
+    <p><input type="number" name="hannum" min="1" max="20" value="1"></p>
+    <br><br>
+    
+    <button type="submit" class="btn btn-primary">決定</button> 
+</form>
 {% endif %}
 {% endblock %}

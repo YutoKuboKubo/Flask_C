@@ -1,0 +1,16 @@
+{% extends "layout.html" %} 
+{% block body %}
+{% if h==1 or h==2 or h==3 %}
+<h1>安い！</h1>
+{% elif h==4 or h==5 %}
+<img src="../static/mangan.png" width=100%>
+{% elif h==6 or h==7 %}
+<img src="../static/haneman.png" width=100%>
+{% elif h==8 or h==9 or h==10 %}
+<img src="../static/baiman.png" width=100%>
+{% elif h==11 or h==12 %}
+<img src="../static/3baiman.png" width=100%>
+{% else %}
+<img src="../static/yakuman.png" width=100%>
+{% endif %}
+{% endblock %}

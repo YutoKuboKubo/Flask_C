@@ -31,6 +31,7 @@ def playtile():
         global tilelink_list
         tilelink_list = tilelinks
         global count
+        count = 1
         return render_template('index.html', tilelinks=tilelink_list, count=count)
 
 @app.route('/<int:num>', methods=['GET'])
@@ -39,21 +40,13 @@ def tileselect(num):
     global tiles
     global count
     if request.method == 'GET':
-        temp = tilelink_list[13]
-        tilelink_list[13] = tilelink_list[num]
-        tilelink_list[num] = temp
+        tiles.pop(num)
+        tiles.sort()
         tumonum = random.randint(1,34)
-        tumopai = Tiles.query.get(tumonum)
-        tilelink_list[13] = tumopai.link
-       
-        for j in range(14):
-            tile = Tiles.query.filter(Tiles.link == tilelink_list[j]).all()
-            print(tiles)
-            print(tile.id)
-            tiles[j] = tile.id
-        new_tiles = tiles[:13].sort() + tiles[13]
+        tiles.append(tumonum)
+
         for k in range(14):
-            new_tile = Tiles.query.get(new_tiles[k])
+            new_tile = Tiles.query.get(tiles[k])
             tilelink_list[k] = new_tile.link
 
         count = count + 1
@@ -67,3 +60,9 @@ def tumo():
 @app.route('/')
 def reload():
     return render_template('index.html')
+
+@app.route('/tumo', methods=['POST'])
+def hancalc():
+    if request.method == 'POST':
+        h = int(request.form['hannum'])
+        return render_template('han.html', h=h)
