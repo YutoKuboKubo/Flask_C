@@ -7,6 +7,8 @@ from mahjong.models.tiles import Tiles
 tiles =[]
 tilelink_list = []
 count = 1
+dora = Tiles.query.get(random.randint(1,34))
+doralink = dora.link
 
 def distribute(tile_list):
     for i in range(14):
@@ -32,13 +34,19 @@ def playtile():
         tilelink_list = tilelinks
         global count
         count = 1
-        return render_template('index.html', tilelinks=tilelink_list, count=count)
+        global dora
+        global doralink
+        dora = Tiles.query.get(random.randint(1,34))
+        doralink = dora.link
+        return render_template('index.html', tilelinks=tilelink_list, count=count, doralink=doralink)
 
 @app.route('/<int:num>', methods=['GET'])
 def tileselect(num):
     global tilelink_list
     global tiles
     global count
+    global dora
+    global doralink
     if request.method == 'GET':
         tiles.pop(num)
         tiles.sort()
@@ -50,7 +58,7 @@ def tileselect(num):
             tilelink_list[k] = new_tile.link
 
         count = count + 1
-        return render_template('index.html', tilelinks=tilelink_list, count=count)
+        return render_template('index.html', tilelinks=tilelink_list, count=count, doralink=doralink)
 
 @app.route('/tumo')
 def tumo():
