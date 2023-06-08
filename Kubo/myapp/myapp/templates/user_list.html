@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}
+ユーザ一覧画面
+{% endblock %}
+{% block body %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">ユーザ名</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+        <th scope="row">{{ user.id }}</th>
+        <td>{{ user.username }}</td>
+        <td>
+            <a href="{{url_for('user_info', id=user.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">情報閲覧</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
