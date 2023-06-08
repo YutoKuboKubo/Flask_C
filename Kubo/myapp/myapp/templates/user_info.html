@@ -6,15 +6,23 @@
     <h1>{{ user.username }}</h1>
     {% for tweet in tweets[::-1] %}
         <div class="card" style="width: 30rem;">
+            {% if tweet.picture_path is none %}
+                <img src="/home/matcha-23training/Flask_C/Kubo/myapp/myapp/static/tweet_images/noimage.png" class="card-img-top">
+            {% else %}
+                <img class="card-img-top" src="{{ url_for('static', filename=tweet.picture_path) }}">
+            {% endif %}
             <div class="card-body">
             <h5 class="card-title">{{ tweet.title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">作成者：{{ tweet.from_user_name }}</h6>
             <p class="card-text">{{ tweet.body }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">作成者：{{ tweet.from_user_name }}</li>
+            </ul>
             {% if tweet.from_user_id == current_user.id %}
                 <a href="{{url_for('update_tweet', id=tweet.id)}}" class="btn btn-primary" role="button" data-bs-toggle="button">編集</a>
                 <a href="{{url_for('delete_tweet', id=tweet.id)}}" class="btn btn-danger" role="button" data-bs-toggle="button">削除</a>
             {% endif %}
-            </div>
         </div>
+        <br>
     {% endfor %}
 {% endblock %}
