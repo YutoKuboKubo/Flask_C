@@ -6,10 +6,12 @@
 
 <p>東1局　あなた：東家　{{ count }}巡目</p>
 <p>ドラ<img src="../static/{{ doralink }}.gif" style="width: 30px; height: 40px; margin-left: 10px;"></p>
+<div class="pai">
 {% for i in range(13) %}
 <a href="{{ url_for('tileselect', num=i) }}" method="get"><img src="../static/{{ tilelinks[i] }}.gif"></a>
 {% endfor %}
 <a href="{{ url_for('tileselect', num=13) }}" method="get"><img src="../static/{{ tilelinks[13] }}.gif" style="margin-left: 30px;"></a>
+</div>
 
 <br><br>
 
