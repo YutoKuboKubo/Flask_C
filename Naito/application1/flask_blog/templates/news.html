@@ -1,0 +1,39 @@
+{% extends "layout.html" %} {% block body %}
+<h5>マイナビニュース</h5>
+    <br>
+    <table class="table">
+        {% if news_list %}
+        <thead>
+            <tr>
+                <th class="table-primary" scope="col">ニュースタイトル</th>
+                <th class="table-primary" scope="col">URL</th>
+                <th class="table-primary" scope="col">日にち</th>
+            </tr>
+        </thead>
+
+        <tbody>       
+            {% for news in news_list %}
+            <tr>
+                <td class="holi_date" scope="row">{{ news.title }}</td>    
+                <td class="holi_text" scope="row">{{ news.url }}</td>  
+                <td class="date" scope="row">{{ news.date }}</td>  
+            </tr>
+            {% endfor %}
+            {% else %}
+            <div class="form-group"></div>
+                <form action="{{ url_for('news') }}" method=post>
+                    <button type="submit" class="btn btn-danger" value="news">ニュース表示</button>
+                </form>
+            </div>
+        {% endif %}     
+        </tbody>
+    </table>    
+    <br>
+
+    <form action="{{ url_for('news') }}" method="post">
+        <button type="submit" class="btn btn-primary">戻る</button>
+    </form>    
+    <br>   
+    <br>
+
+{% endblock %}
